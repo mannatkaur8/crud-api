@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'war'
+	id 'org.springframework.boot' version '3.3.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.crud'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Web (Spring MVC, Jackson)
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Data JPA (Hibernate)
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// Validation (@NotBlank, @Email, etc.)
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// --- Database drivers ---
+	// Use H2 for dev (in-memory)
+	runtimeOnly 'com.h2database:h2'
+	// Use MySQL when you want persistence
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// Lombok (optional)
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// For WAR packaging: container-provided Tomcat (external)
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+	// Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
