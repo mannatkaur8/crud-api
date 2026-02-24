@@ -6,6 +6,7 @@ Includes clean layering, DTOs, and proper exception handling.
 
 ## Features
 - CRUD for Students
+- Request Validation (using `@Valid` + annotations)
 - Controller → Service → Repository architecture
 - DTOs (Create, Update, Response)
 - Custom `ResourceNotFoundException`
@@ -23,6 +24,18 @@ gradlew.bat bootRun
 
 http://localhost:8081
 
+
+##  Validation
+
+Validation is applied on DTO fields using annotations like:
+@NotNull
+@Size(min = 3)
+@Email
+
+Controller uses:
+@Valid @RequestBody
+
+Validation errors are handled via global exception handler.
 
 
 ## API Endpoints (Students)
@@ -76,7 +89,6 @@ README.md
 
 
 ## Future Improvements
-- Add validation
 - Add pagination & sorting
 - Add JWT authentication
 - Add Swagger docs
